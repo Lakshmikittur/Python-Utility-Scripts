@@ -47,10 +47,12 @@ def Save_Data_To_File(DirectoryPath):
     file_name = os.path.join(DirectoryPath,"DuplicateFiles.txt")
     with open(file_name,"w") as f:
         for val in All_Files_Hash.values():
-            f.write("Duplicates")
-            for l in val:
-                f.write(l)
-            f.write("\n\n\n")
+            if len(val) > 1:
+                f.write("Duplicates\n")
+                for l in val:
+                    f.write(l)
+                    f.write("\n")
+                f.write("\n\n\n")
     return file_name
 
 
@@ -100,5 +102,5 @@ if __name__ == "__main__":
     else:
         #print(All_Files_Hash)
         file_name = Save_Data_To_File(DirectoryPath)
-        sg.Popup("Result stored in file {}".format(file_name))
+        sg.Popup("Result","Result stored in file {}".format(file_name))
     #pause = input("Search Completed. Press any key to continue!!")
